@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy } from 'react';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import { Navbar } from 'reactstrap';
+const Home = lazy(() => import('./pages/Home'));
+const ApplicationDetails = lazy(() => import('./pages/ApplicationDetails'));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Navbar className="my-2 text-white" color="dark" dark>
+        <Link to="/" className="navbar-brand">
+          Home{' '}
+        </Link>
+      </Navbar>
+      <Switch>
+        <Route exact={true} path="/" component={Home} />
+        <Route
+          exact={true}
+          path="/app/:appName"
+          component={ApplicationDetails}
+        />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
